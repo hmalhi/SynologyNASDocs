@@ -21,19 +21,19 @@ So I went about fixing the issue myself.
 4. I restarted the system few times when clicked on file system check link but it never went away and my home/homes folder were still not accessible
 5. This meant my file system was not able to auto recover the issues due to power outage so I had to take some deeper steps to fix.
 6. I ran following command by logging into ssh as administrator. ***Make sure you disbale 2FA prior to doing the next steps.***
-## Become root
+### Become root
  sudo -i
-## Get volume device info
+### Get volume device info
 df
 e.g
 /dev/mapper/cachedev_0 14516766 13691149 825498  95% /volume1
-## unmount volume, this is needed to run file system check
+### unmount volume, this is needed to run file system check
 sudo synostgvolume --unmount -p /volume1
-## run file system check without making any changes. Run next command only if this is successful, it was successful in my case :)
+### run file system check without making any changes. Run next command only if this is successful, it was successful in my case :)
 e2fsck -nvf -C 0 /dev/mapper/cachedev_0 (make sure this is same as listed using df command above)
-## Run file system check again this time with auto recovery
+### Run file system check again this time with auto recovery
 e2fsck -pvf -C 0 /dev/mapper/cachedev_0 //this failed for me :(
-## Run file system check again this time with recovery set to Yes for all, only if previous step did not work
+### Run file system check again this time with recovery set to Yes for all, only if previous step did not work
 e2fsck -yvf -C 0 /dev/mapper/cachedev_0 //worked for me with recovered files moved to lost+found folder
 
 System reboots, in my case I could not login due to 2FA enabled so had to reset NAS as per <a href="https://kb.synology.com/en-eu/DSM/tutorial/How_to_reset_my_Synology_NAS_7#t1">synology documentation</a>
