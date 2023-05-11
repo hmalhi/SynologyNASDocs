@@ -20,7 +20,7 @@ So I went about fixing the issue myself.
 3. The file-system was read-write now and Storage manage showed that file system/volume check was needed
 4. I restarted the system few times when clicked on file system check link but it never went away and my home/homes folder were still not accessible
 5. This meant my file system was not able to auto recover the issues due to power outage so I had to take some deeper steps to fix.
-6. I ran following command by logging into ssh as administrator. ***Make sure you disbale 2FA prior to doing the next steps.***
+6. I ran following command by logging into ssh as administrator. ***Make sure you disable 2FA prior to doing the next steps.***
 ### Become root
  sudo -i
 ### Get volume device info
